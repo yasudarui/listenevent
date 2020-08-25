@@ -1,17 +1,19 @@
 package com.yasudarui.listenevent.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class TestEventListenerController {
 
     @Autowired
-    private MyTestEventPubLisher publisher;
+    private ApplicationContext  applicationContext;
 
-    @RequestMapping(value = "/test/testPublishEvent1" )
+    @RequestMapping(value = "/test" )
     public void testPublishEvent(){
-        publisher.pushListener("我来了！");
+        applicationContext.publishEvent(new MyEvent(this,"hello"));
     }
 }
